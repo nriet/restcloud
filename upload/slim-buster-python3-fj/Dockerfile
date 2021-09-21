@@ -14,8 +14,8 @@ RUN set -eux; \
 	rm -rf RestCloud-Update.zip \
 	/usr/local/tomcat/webapps/ROOT/WEB-INF/lib/restcloud-* \
 	; \
-	cp -rf /tmp/RestCloud-Update/initdata /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/initdata; \
-	cp -rf /tmp/RestCloud-Update/lib /usr/local/tomcat/webapps/ROOT/WEB-INF/lib; \
+	cp -rf /tmp/RestCloud-Update/initdata/* /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/initdata/; \
+	cp -rf /tmp/RestCloud-Update/lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/; \
 	rm -rf /tmp/RestCloud-Update 
 
 EXPOSE 8080
