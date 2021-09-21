@@ -6,6 +6,7 @@ USER root
 
 ENV RESTCLOUD_VERSION 1.6.1
 
+
 RUN set -eux; \
 	\
 	wget -O RestCloud-Update.zip "https://club.restcloud.cn/developers-server/rest/down/download_new?fileName=RestCloud-Update-V${RESTCLOUD_VERSION}.zip&type=3"; \
@@ -13,9 +14,11 @@ RUN set -eux; \
 	rm -rf RestCloud-Update.zip \
 	/usr/local/tomcat/webapps/ROOT/WEB-INF/lib/restcloud-* \
 	; \
-	cp -rf /tmp/RestCloud-Update/initdata /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/initdata; \
-	cp -rf /tmp/RestCloud-Update/lib /usr/local/tomcat/webapps/ROOT/WEB-INF/lib; \
+	cp -rf /tmp/RestCloud-Update/initdata/* /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/initdata/; \
+	cp -rf /tmp/RestCloud-Update/lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/; \
 	rm -rf /tmp/RestCloud-Update 
+
+COPY restcloud-etlcore-1.4.0.jar /usr/local/tomcat/webapps/ROOT/WEB-INF/lib
 
 EXPOSE 8080
 

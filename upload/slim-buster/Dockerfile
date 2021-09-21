@@ -19,6 +19,8 @@ RUN set -eux; \
 	cp -rf /tmp/RestCloud-Update/lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/; \
 	rm -rf /tmp/RestCloud-Update 
 
+COPY restcloud-etlcore-1.4.0.jar /usr/local/tomcat/webapps/ROOT/WEB-INF/lib
+
 EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
