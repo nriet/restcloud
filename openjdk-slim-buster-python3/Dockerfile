@@ -4,9 +4,13 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV RESTCLOUD_VERSION 1.2.1
 
-RUN apt-get update -y && \
-	apt-get install wget unzip && \
-	apt-get clean all && \
+
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		wget \
+		unzip \
+	; \
 	rm -rf /var/cache/apt 
 
 RUN set -eux; \
