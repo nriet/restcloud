@@ -11,11 +11,11 @@ RUN apt-get update -y && \
 
 RUN set -eux; \
 	\
-	wget -O RestCloud-Linux.zip "https://club.restcloud.cn/developers-server/rest/down/download_new?fileName=RestCloud-Linux-V${RESTCLOUD_VERSION}.zip&type=2" && \
-	unzip RestCloud-Linux.zip && \
-	rm -rf RestCloud-Linux.zip /usr/local/tomcat/conf/context.xml /usr/local/tomcat/webapps/* && \
-	unzip -d /usr/local/tomcat/apache-tomcat-8.5.57/webapps/ROOT /usr/local/tomcat/webapps/ROOT.war && \
-	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57 
+	wget -O RestCloud-Linux.zip "https://club.restcloud.cn/developers-server/rest/down/download_new?fileName=RestCloud-Linux-V${RESTCLOUD_VERSION}.zip&type=2"; \
+	unzip RestCloud-Linux.zip; \
+	rm -rf RestCloud-Linux.zip /usr/local/tomcat/conf/context.xml /usr/local/tomcat/webapps/*; \
+	unzip -d /usr/local/tomcat/apache-tomcat-8.5.57/webapps/ROOT /usr/local/tomcat/webapps/ROOT.war; \
+	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57
 	
 COPY context.xml /usr/local/tomcat/conf/
 
