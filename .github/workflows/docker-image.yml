@@ -33,6 +33,6 @@ jobs:  # workflow中的job
       - name: Build and push Docker image
         uses: docker/build-push-action@v2 # docker build  & push
         with:
-          context: openjdk-slim-buster-python3/.
+          context: .
           push: true
-          tags: nriet/restcloud:8.5.78-jdk8-openjdk-slim-buster-python3
+          tags: nriet/restcloud:1.2.1
