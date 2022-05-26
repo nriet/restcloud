@@ -4,18 +4,18 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV RESTCLOUD_VERSION 1.2.1
 
+RUN apt-get update -y && \
+	apt-get install wget unzip && \
+	apt-get clean all && \
+	rm -rf /var/cache/apt 
+
 RUN set -eux; \
-	apt-get update; \
-	apt-get install -y --no-install-recommends 
-	wget \
-	unzip; \
+	\
 	wget -O RestCloud-Linux.zip "https://club.restcloud.cn/developers-server/rest/down/download_new?fileName=RestCloud-Linux-V${RESTCLOUD_VERSION}.zip&type=2" && \
 	unzip RestCloud-Linux.zip && \
 	rm -rf RestCloud-Linux.zip /usr/local/tomcat/conf/context.xml /usr/local/tomcat/webapps/* && \
 	unzip -d /usr/local/tomcat/apache-tomcat-8.5.57/webapps/ROOT /usr/local/tomcat/webapps/ROOT.war && \
-	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57 && \
-	apt-get clean all && \
-	rm -rf /var/cache/apt 
+	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57 
 	
 COPY context.xml /usr/local/tomcat/conf/
 
