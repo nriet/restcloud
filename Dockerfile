@@ -21,6 +21,8 @@ RUN set -eux; \
 	cp /usr/local/tomcat/apache-tomcat-8.5.57/conf/context.xml /usr/local/tomcat/conf/; \
 	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57
 
+COPY application.properties /usr/local/tomcat/apache-tomcat-8.5.57/webapps/ROOT/WEB-INF/classes/
+
 EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
