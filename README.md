@@ -4,7 +4,7 @@ https://club.restcloud.cn/article
 
 # 镜像说明
 * os：slim-buster
-* tomcat：基于官方tomcat 8.5.79镜像 https://hub.docker.com/_/tomcat?tab=description
+* tomcat：基于官方tomcat 8.5.78镜像 https://hub.docker.com/_/tomcat?tab=description
 * jdk：openjdk1.8.0_332
 * other：Python 3.9.13、中文语言包、net-tools
 
@@ -36,7 +36,7 @@ nriet/restcloud:1.3.0
 docker run --restart=always --name='restcloud' -d \
 -p 8080:8080 \
 -v 持久化目录/ROOT:/usr/local/tomcat/webapps/ROOT \
-nriet/tomcat:8.5.79-jdk8-openjdk-slim-buster-python3
+nriet/tomcat:8.5.78-jdk8-openjdk-slim-buster-python3
 ```
 
 
