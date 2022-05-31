@@ -1,4 +1,4 @@
-FROM nriet/restcloud:1.2.1
+FROM nriet/restcloud:1.3.0
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
