@@ -13,8 +13,8 @@ RUN set -eux; \
 	/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/static/res \
 	; \
 	cp -r /tmp/RestCloud-Update/static/res /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/static/; \
-	cp -r /tmp/RestCloud-Update/lib/restcloud-* /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/lib/; \
-	rm -rf /tmp/RestCloud-Update
+	cp -r /tmp/RestCloud-Update/lib/restcloud-* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/; \
+	rm -rf /tmp/RestCloud-Update 
 
 EXPOSE 8080
 
