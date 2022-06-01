@@ -1,15 +1,12 @@
-FROM tomcat:8.5.78-jdk8-openjdk-slim-buster
+FROM nriet/tomcat:8.5.78-jdk8-openjdk-slim-buster-python3
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
-
-ENV TZ PRC
 
 ENV RESTCLOUD_VERSION 1.3.0
 
 RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
-		net-tools \
 		wget \
 		unzip \
 	; \
@@ -24,10 +21,7 @@ RUN set -eux; \
 	cp /usr/local/tomcat/apache-tomcat-8.5.57/conf/context.xml /usr/local/tomcat/conf/; \
 	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57
 
-COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
-
-
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+COPY ../application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
 EXPOSE 8080
 
