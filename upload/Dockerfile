@@ -2,7 +2,7 @@ FROM nriet/restcloud
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
-ENV RESTCLOUD_VERSION 1.3.1
+ENV RESTCLOUD_VERSION 1.3.0
 
 RUN set -eux; \
 	\
