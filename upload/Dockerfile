@@ -1,16 +1,8 @@
-FROM nriet/restcloud:1.2.1
+FROM nriet/restcloud
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
-ENV RESTCLOUD_VERSION 1.2.1
-
-RUN set -eux; \
-	apt-get update; \
-	apt-get install -y --no-install-recommends \
-		wget \
-		unzip \
-	; \
-	rm -rf /var/cache/apt 
+ENV RESTCLOUD_VERSION 1.3.1
 
 RUN set -eux; \
 	\
