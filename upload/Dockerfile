@@ -16,7 +16,6 @@ RUN set -eux; \
 	cp -r /tmp/RestCloud-Update/lib/restcloud-* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/; \
 	rm -rf /tmp/RestCloud-Update 
 
-COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
 EXPOSE 8080
 
