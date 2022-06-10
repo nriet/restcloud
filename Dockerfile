@@ -4,7 +4,7 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV TZ PRC
 
-ENV RESTCLOUD_VERSION 1.3.0
+ENV RESTCLOUD_VERSION 1.4.0
 
 RUN set -eux; \
 	apt-get update; \
@@ -22,7 +22,6 @@ RUN set -eux; \
 	rm -rf RestCloud-Linux.zip /usr/local/tomcat/webapps/*; \
 	unzip -d /usr/local/tomcat/webapps/ROOT /usr/local/tomcat/apache-tomcat-8.5.57/webapps/ROOT.war; \
 	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57
-
 
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
