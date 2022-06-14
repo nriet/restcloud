@@ -20,6 +20,7 @@ RUN set -eux; \
 	unzip -d /usr/local/tomcat/webapps/ROOT /usr/local/tomcat/apache-tomcat-8.5.57/webapps/ROOT.war; \
 	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57
 
+COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
 EXPOSE 8080
 
