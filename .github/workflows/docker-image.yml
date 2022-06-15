@@ -36,6 +36,7 @@ jobs:  # workflow中的job
           context: .
           push: true
           tags: nriet/restcloud
+          
       # - name: restcloud
       #   uses: docker/build-push-action@v2 # docker build  & push
       #   with:
