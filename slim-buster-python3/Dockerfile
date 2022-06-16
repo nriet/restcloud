@@ -18,7 +18,8 @@ RUN set -eux; \
 	unzip RestCloud-Linux.zip; \
 	rm -rf RestCloud-Linux.zip /usr/local/tomcat/webapps/*; \
 	unzip -d /usr/local/tomcat/webapps/ROOT /usr/local/tomcat/apache-tomcat-8.5.57/webapps/ROOT.war; \
-	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57
+	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57; \
+	rm -rf /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/mongo-java-driver*
 	
 COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
