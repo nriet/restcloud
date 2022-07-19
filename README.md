@@ -1,26 +1,32 @@
 Restcloud ETL 社区版
 https://club.restcloud.cn/article
 
+镜像地址
+https://hub.docker.com/r/nriet/restcloud
+
+#### 临时测试
+    建议使用docker-compose部署
+
 
 # 镜像说明 
 ### nriet/restcloud:latest
-* version：1.4.1
+* version：1.5.0
 * os：slim-buster
 * tomcat：基于官方镜像 tomcat:8.5.78-jdk8-openjdk-slim-buster
 * jdk：openjdk-1.8.0_332
 * python： 无
 * other：中文语言包、中国标准时间、net-tools
 
-### nriet/restcloud:1.4.1-slim-buster
-* version：1.4.1
+### nriet/restcloud:1.5.0-slim-buster
+* version：1.5.0
 * os：slim-buster
 * tomcat：基于官方镜像 tomcat:8.5.78-jdk8-openjdk-slim-buster
 * jdk：openjdk-1.8.0_332
 * python： 无
 * other：中文语言包、中国标准时间、net-tools
 
-### nriet/restcloud:1.4.1-slim-buster-python3
-* version：1.4.1
+### nriet/restcloud:1.5.0-slim-buster-python3
+* version：1.5.0
 * os：slim-buster
 * tomcat：基于官方镜像 tomcat:8.5.78-jdk8-openjdk-slim-buster
 * jdk：openjdk-1.8.0_332
@@ -56,7 +62,8 @@ nriet/restcloud:latest
 
 ### 不带ROOT
 需要映射ROOT
-```
+
+```docker
 docker run --restart=always --name='restcloud' -d \
 -p 8080:8080 \
 -v 持久化目录/ROOT:/usr/local/tomcat/webapps/ROOT \
@@ -69,7 +76,7 @@ nriet/tomcat:8.5.78-jdk8-openjdk-slim-buster-python3
 
 ### docker-compose.yml
 
-```
+```docker
 version: "3.9"
 
 services:
@@ -104,7 +111,7 @@ volumes:
 
 ```
 ### 启动Docker Compose
-```
+```docker
 # 后台启动
 docker-compose up -d
 ```
