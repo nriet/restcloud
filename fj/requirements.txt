@@ -1,2 +1,5 @@
 numpy
 netcdf4
+cdsapi
+math
+xlrd
