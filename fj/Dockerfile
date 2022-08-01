@@ -19,6 +19,10 @@ RUN set -eux; \
 
 COPY requirements.txt ./
 
+#下载Era5认证文件
+#https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form
+COPY .cdsapirc /root/
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8080
