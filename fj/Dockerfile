@@ -1,4 +1,4 @@
-FROM nriet/restcloud:1.5.0-slim-buster-python3
+FROM nriet/restcloud:1.6.0-slim-buster-python3
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
