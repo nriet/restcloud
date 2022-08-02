@@ -3,8 +3,8 @@ FROM nriet/restcloud:1.6.0-slim-buster-python3
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV NWP_PL_VERSION 1.0
-
-COPY NWP_PL_V${NWP_PL_VERSION}.tar.gz /app/
+COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
+COPY app.tar.gz /
 
 ENV GRIB_DEFINITION_PATH /app/NWP_PL_V${NWP_PL_VERSION}/definitions
 
@@ -13,8 +13,8 @@ ENV LD_LIBRARY_PATH :/app/NWP_PL_V${NWP_PL_VERSION}/lib
 
 RUN set -eux; \
 	\
-	tar zxvf /app/NWP_PL_V${NWP_PL_VERSION}.tar.gz -C /app/; \
-	rm -rf /app/NWP_PL_V${NWP_PL_VERSION}.tar.gz
+	tar zxvf /app.tar.gz -C /; \
+	rm -rf /app.tar.gz
 
 
 COPY requirements.txt ./
