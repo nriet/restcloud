@@ -5,7 +5,7 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 ENV NWP_PL_VERSION 1.0
 COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 COPY app.tar.gz /
-
+COPY lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
 ENV GRIB_DEFINITION_PATH /app/NWP_PL_V${NWP_PL_VERSION}/definitions
 
 ENV LD_LIBRARY_PATH :/app/NWP_PL_V${NWP_PL_VERSION}/lib
