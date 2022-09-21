@@ -16,7 +16,11 @@ RUN set -eux; \
 	; \
 	cp -rf /tmp/RestCloud-Update/initdata/* /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/initdata/; \
 	cp -rf /tmp/RestCloud-Update/lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/; \
-	rm -rf /tmp/RestCloud-Update 
+	rm -rf /tmp/RestCloud-Update  \
+	/usr/local/tomcat/webapps/ROOT/WEB-INF/lib/restcloud-etlcore-1.4.0.jar \
+	;
+
+ADD restcloud-etlcore-1.4.0.jar /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
 
 EXPOSE 8080
 
