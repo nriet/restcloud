@@ -11,10 +11,9 @@ RUN set -eux; \
 	unzip -d /tmp/RestCloud-Update RestCloud-Update.zip; \
 	rm -rf RestCloud-Update.zip \
 	/usr/local/tomcat/webapps/ROOT/WEB-INF/lib/restcloud-* \
-	/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/static/res \
 	; \
-	cp -r /tmp/RestCloud-Update/static/res /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/static/; \
-	cp -r /tmp/RestCloud-Update/lib/restcloud-* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/; \
+	\\cp -rf /tmp/RestCloud-Update/initdata /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/initdata; \
+	\\cp -rf /tmp/RestCloud-Update/lib /usr/local/tomcat/webapps/ROOT/WEB-INF/lib; \
 	rm -rf /tmp/RestCloud-Update 
 
 
