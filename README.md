@@ -10,23 +10,23 @@ https://hub.docker.com/r/nriet/restcloud
 
 # 镜像说明 
 ### nriet/restcloud:latest
-* version：1.6.0
+* version：1.6.1
 * os：slim-buster
 * tomcat：基于官方镜像 tomcat:8.5.78-jdk8-openjdk-slim-buster
 * jdk：openjdk-1.8.0_332
 * python： 无
 * other：中文语言包、中国标准时间、net-tools
 
-### nriet/restcloud:1.6.0-slim-buster
-* version：1.6.0
+### nriet/restcloud:1.6.1-slim-buster
+* version：1.6.1
 * os：slim-buster
 * tomcat：基于官方镜像 tomcat:8.5.78-jdk8-openjdk-slim-buster
 * jdk：openjdk-1.8.0_332
 * python： 无
 * other：中文语言包、中国标准时间、net-tools
 
-### nriet/restcloud:1.6.0-slim-buster-python3
-* version：1.6.0
+### nriet/restcloud:1.6.1-slim-buster-python3
+* version：1.6.1
 * os：slim-buster
 * tomcat：基于官方镜像 tomcat:8.5.78-jdk8-openjdk-slim-buster
 * jdk：openjdk-1.8.0_332

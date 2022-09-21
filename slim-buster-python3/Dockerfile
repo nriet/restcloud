@@ -2,7 +2,7 @@ FROM nriet/tomcat:8.5.78-jdk8-openjdk-slim-buster-python3
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
-ENV RESTCLOUD_VERSION 1.6.0
+ENV RESTCLOUD_VERSION 1.6.1
 
 RUN set -eux; \
 	apt-get update; \
