@@ -17,8 +17,6 @@ RUN set -eux; \
 	cp -rf /tmp/RestCloud-Update/lib /usr/local/tomcat/webapps/ROOT/WEB-INF/lib; \
 	rm -rf /tmp/RestCloud-Update 
 
-COPY RestCloud-Update-V${RESTCLOUD_VERSION}/ /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
-
 EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
