@@ -15,6 +15,7 @@ RUN apt-get update \
         postgis postgresql-12-postgis-3-scripts gdal-bin libgdal-dev libnetcdf-dev; \
     rm -rf /var/lib/apt/lists/*
 
+
 RUN set -eux; \
 	\
 	tar zxvf /app.tar.gz -C /; \
