@@ -12,7 +12,7 @@ ENV LD_LIBRARY_PATH :/app/NWP_PL_V${NWP_PL_VERSION}/lib
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
-        gdal-bin libgdal-dev libnetcdf-dev postgis postgresql-12-postgis-3-scripts ; \
+        gdal-bin libgdal-dev libnetcdf-dev postgis; \
     rm -rf /var/lib/apt/lists/*
 
 
