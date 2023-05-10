@@ -15,6 +15,8 @@ RUN apt-get update \
         gdal-bin libgdal-dev libnetcdf-dev postgresql-client postgis; \
     rm -rf /var/lib/apt/lists/*
 
+#timescaledb认证文件
+COPY .pgpass /root/
 
 RUN set -eux; \
 	\
