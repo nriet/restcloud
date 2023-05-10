@@ -20,6 +20,7 @@ COPY .pgpass /root/
 
 RUN set -eux; \
 	\
+	chmod 600 /root/.pgpass /; \
 	tar zxvf /app.tar.gz -C /; \
 	rm -rf /app.tar.gz
 
