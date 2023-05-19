@@ -11,7 +11,6 @@ RUN set -eux; \
 	apt-get install -y --no-install-recommends \
 		net-tools \
 		wget \
-		unzip \
 	; \
 	rm -rf /var/cache/apt 
 
@@ -20,9 +19,7 @@ RUN set -eux; \
 	wget -O linux-tomcat.tar.gz "https://www.etlcloud.cn/download/linux-tomcat.tar.gz"; \
 	tar zxvf linux-tomcat.tar.gz; \
 	rm -rf linux-tomcat.tar.gz /usr/local/tomcat/webapps/*; \
-	unzip -d /usr/local/tomcat/webapps/ROOT /usr/local/tomcat/apache-tomcat-8.5.57/webapps/ROOT.war; \
-	rm -rf /usr/local/tomcat/apache-tomcat-8.5.57; \
-	rm -rf /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/mongodb-driver*
+	mv -r tomcat/webapps/ROOT /usr/local/tomcat/webapps
 
 
 
