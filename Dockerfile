@@ -19,7 +19,8 @@ RUN set -eux; \
 	wget -O linux-tomcat.tar.gz "https://www.etlcloud.cn/download/linux-tomcat.tar.gz"; \
 	tar zxvf linux-tomcat.tar.gz; \
 	rm -rf linux-tomcat.tar.gz /usr/local/tomcat/webapps/*; \
-	mv -r tomcat/webapps/ROOT /usr/local/tomcat/webapps
+	mv tomcat/webapps/ROOT /usr/local/tomcat/webapps; \
+	rm -rf tomcat
 
 
 
