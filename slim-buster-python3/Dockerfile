@@ -2,6 +2,8 @@ FROM nriet/tomcat:8.5.78-jdk8-openjdk-slim-buster-python3
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
+ENV TZ PRC
+
 ENV RESTCLOUD_VERSION 2.0
 
 RUN set -eux; \
@@ -19,9 +21,12 @@ RUN set -eux; \
 	rm -rf linux-tomcat.tar.gz /usr/local/tomcat/webapps/*; \
 	mv tomcat/webapps/ROOT /usr/local/tomcat/webapps; \
 	rm -rf tomcat
-	
-COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
+
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
 EXPOSE 8080
 
