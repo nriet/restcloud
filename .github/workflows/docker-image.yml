@@ -30,12 +30,12 @@ jobs:  # workflow中的job
         with:
           images: nriet/tomcat
         
-      - name: restcloud
-        uses: docker/build-push-action@v2 # docker build  & push
-        with:
-          context: .
-          push: true
-          tags: nriet/restcloud
+      # - name: restcloud
+      #   uses: docker/build-push-action@v2 # docker build  & push
+      #   with:
+      #     context: .
+      #     push: true
+      #     tags: nriet/restcloud
           
       # - name: restcloud
       #   uses: docker/build-push-action@v2 # docker build  & push
@@ -51,12 +51,12 @@ jobs:  # workflow中的job
       #     push: true
       #     tags: nriet/restcloud:1.6.1-slim-buster
 
-      # - name: restcloud:slim-buster-python3
-      #   uses: docker/build-push-action@v2 # docker build  & push
-      #   with:
-      #     context: upload/slim-buster-python3/.
-      #     push: true
-      #     tags: nriet/restcloud:1.6.1-slim-buster-python3
+      - name: restcloud:slim-buster-python3
+        uses: docker/build-push-action@v2 # docker build  & push
+        with:
+          context: upload/slim-buster-python3/.
+          push: true
+          tags: nriet/restcloud:2.0-slim-buster-python3
 
       # - name: restcloud:slim-buster-python3-fj
       #   uses: docker/build-push-action@v2 # docker build  & push
