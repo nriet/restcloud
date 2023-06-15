@@ -4,7 +4,7 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV TZ PRC
 
-ENV RESTCLOUD_VERSION 2.0
+ENV RESTCLOUD_VERSION 2.2
 
 RUN set -eux; \
 	apt-get update; \
@@ -16,9 +16,9 @@ RUN set -eux; \
 
 RUN set -eux; \
 	\
-	wget -O linux-tomcat.tar.gz "https://www.etlcloud.cn/download/linux-tomcat.tar.gz"; \
-	tar zxvf linux-tomcat.tar.gz; \
-	rm -rf linux-tomcat.tar.gz /usr/local/tomcat/webapps/*; \
+	wget -O linux-tomcat.tar "https://etl.restcloud.cn/download/linux-tomcat.tar"; \
+	tar xvf linux-tomcat.tar; \
+	rm -rf linux-tomcat.tar /usr/local/tomcat/webapps/*; \
 	mv tomcat/webapps/ROOT /usr/local/tomcat/webapps; \
 	rm -rf tomcat
 
