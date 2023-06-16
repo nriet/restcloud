@@ -16,7 +16,7 @@ RUN set -eux; \
 
 RUN set -eux; \
 	\
-	wget -O linux-tomcat.tar "https://etl.restcloud.cn/download/linux-tomcat.tar"; \
+	wget -O linux-tomcat.tar "https://etl.restcloud.cn/download/linux-tomcat.tar" --no-check-certificate; \
 	tar xvf linux-tomcat.tar; \
 	rm -rf linux-tomcat.tar /usr/local/tomcat/webapps/*; \
 	mv tomcat/webapps/ROOT /usr/local/tomcat/webapps; \
