@@ -19,7 +19,7 @@ RUN set -eux; \
 	\
 	wget -O ROOT.war "https://etl.restcloud.cn/download/RestCloud-ETL-V${RESTCLOUD_VERSION}.war" --no-check-certificate; \
 	rm -rf /usr/local/tomcat/webapps/*; \
-	unzip -oq ROOT.war /usr/local/tomcat/webapps/ROOT; \
+	unzip -oq ROOT.war -d /usr/local/tomcat/webapps/ROOT; \
 	rm -rf ROOT.war 
 
 
