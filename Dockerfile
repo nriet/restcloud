@@ -11,22 +11,22 @@ RUN set -eux; \
 	apt-get install -y --no-install-recommends \
 		net-tools \
 		wget \
+		unzip \
 	; \
 	rm -rf /var/cache/apt 
 
 RUN set -eux; \
 	\
 	wget -O ROOT.war "https://etl.restcloud.cn/download/RestCloud-ETL-V${RESTCLOUD_VERSION}.war" --no-check-certificate; \
-	tar xvf ROOT.war; \
-	rm -rf ROOT.war /usr/local/tomcat/webapps/*; \
-	mv tomcat/webapps/ROOT /usr/local/tomcat/webapps; \
-	rm -rf tomcat
+	rm -rf /usr/local/tomcat/webapps/*; \
+	unzip -oq ROOT.war /usr/local/tomcat/webapps/ROOT; \
+	rm -rf ROOT.war 
 
 
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
+#COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
 EXPOSE 8080
 
