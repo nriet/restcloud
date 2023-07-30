@@ -12,7 +12,7 @@ https://hub.docker.com/r/nriet/restcloud
 ### nriet/restcloud:latest
 * version：1.6.1
 * os：slim-buster
-* tomcat：基于官方镜像 tomcat:8.5.78-jdk8-openjdk-slim-buster
+* tomcat：基于官方镜像 tomcat:8.5.82-jdk8-openjdk-slim-buster
 * jdk：openjdk-1.8.0_332
 * python： 无
 * other：中文语言包、中国标准时间、net-tools
@@ -20,7 +20,7 @@ https://hub.docker.com/r/nriet/restcloud
 ### nriet/restcloud:1.6.1-slim-buster
 * version：1.6.1
 * os：slim-buster
-* tomcat：基于官方镜像 tomcat:8.5.78-jdk8-openjdk-slim-buster
+* tomcat：基于官方镜像 tomcat:8.5.82-jdk8-openjdk-slim-buster
 * jdk：openjdk-1.8.0_332
 * python： 无
 * other：中文语言包、中国标准时间、net-tools
@@ -28,7 +28,7 @@ https://hub.docker.com/r/nriet/restcloud
 ### nriet/restcloud:1.6.1-slim-buster-python3
 * version：1.6.1
 * os：slim-buster
-* tomcat：基于官方镜像 tomcat:8.5.78-jdk8-openjdk-slim-buster
+* tomcat：基于官方镜像 tomcat:8.5.82-jdk8-openjdk-slim-buster
 * jdk：openjdk-1.8.0_332
 * python： 3.9.13
 * other：中文语言包、中国标准时间、net-tools
@@ -67,7 +67,7 @@ nriet/restcloud:latest
 docker run --restart=always --name='restcloud' -d \
 -p 8080:8080 \
 -v 持久化目录/ROOT:/usr/local/tomcat/webapps/ROOT \
-nriet/tomcat:8.5.78-jdk8-openjdk-slim-buster-python3
+nriet/tomcat:8.5.82-jdk8-openjdk-slim-buster-python3
 ```
 
 

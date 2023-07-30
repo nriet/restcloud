@@ -1,10 +1,10 @@
-FROM tomcat:8.5.78-jdk8-openjdk-slim-buster
+FROM tomcat:8.5.82-jdk8-openjdk-slim-buster
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV TZ PRC
 
-ENV RESTCLOUD_VERSION 2.3
+ENV RESTCLOUD_VERSION 2.4
 
 RUN set -eux; \
 	apt-get update; \
