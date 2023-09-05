@@ -6,6 +6,8 @@ ENV NCARG_ROOT :/app/ncl
 
 ENV NCLJOB_ROOTS :/app/ncl_component
 
+ENV PATH /app/ncl/bin:$PATH
+
 COPY app/* /app/
 
 COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
