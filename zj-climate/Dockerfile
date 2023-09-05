@@ -26,6 +26,8 @@ RUN set -eux; \
 	tar zxvf /app/ncl.tar.gz -C /app; \
 	rm -rf /app/ncl.tar.gz
 
+RUN ncl -version
+
 EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
