@@ -14,17 +14,23 @@ COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
 COPY lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
 
+COPY sources.list /etc/apt/sources.list
+
 RUN set -eux; \
 	\
 	tar zxvf /app/ncl.tar.gz -C /app; \
 	rm -rf /app/ncl.tar.gz
-    
+
+# RUN apt-get update \
+#       && apt-get install -y --no-install-recommends \
+#        gcc-6/stretch fontconfig libssl-dev libidn11-dev libfontconfig1; \
+#     rm -rf /var/lib/apt/lists/*
+
+
 RUN apt-get update \
-      && apt-get install -y --no-install-recommends \
-       libssl-dev libidn11-dev; \
-       ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libssl.so.10; \
-       ln -s /usr/lib/x86_64-linux-gnu/libcrypt-2.28.so /usr/lib/x86_64-linux-gnu/libcrypto.so.10; \
-    rm -rf /var/lib/apt/lists/*
+    && apt-get install -y gcc-6/stretch fontconfig \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 6 \
+    && apt-get install -y libgfortran3/stretch
 
 
 RUN ncl -version
