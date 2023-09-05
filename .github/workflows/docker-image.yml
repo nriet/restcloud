@@ -63,5 +63,5 @@ jobs:  # workflow中的job
         with:
           context: zj-climate/.
           push: true
-          tags: nriet/restcloud:2.5-slim-buster-zj-climat
+          tags: nriet/restcloud:2.5-slim-buster-zj-climate
           
