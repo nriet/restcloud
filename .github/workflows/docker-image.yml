@@ -24,11 +24,11 @@ jobs:  # workflow中的job
           username: ${{ secrets.DOCKER_HUB_USER }}  # 配置dockerhub的认证，在Github项目主页 【Settings】 -> 【Secrets】 添加对应变量
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v3  # 抽取项目信息，主要是镜像的tag
-        with:
-          images: nriet/tomcat
+      # - name: Extract metadata (tags, labels) for Docker
+      #   id: meta
+      #   uses: docker/metadata-action@v3  # 抽取项目信息，主要是镜像的tag
+      #   with:
+      #     images: nriet/tomcat
         
       # - name: restcloud
       #   uses: docker/build-push-action@v2 # docker build  & push
@@ -44,12 +44,12 @@ jobs:  # workflow中的job
       #     push: true
       #     tags: nriet/restcloud:2.4-slim-buster
 
-      - name: restcloud:2.4-slim-buster-python3
-        uses: docker/build-push-action@v2 # docker build  & push
-        with:
-          context: slim-buster-python3/.
-          push: true
-          tags: nriet/restcloud:2.4-slim-buster-python3
+      # - name: restcloud:2.4-slim-buster-python3
+      #   uses: docker/build-push-action@v2 # docker build  & push
+      #   with:
+      #     context: slim-buster-python3/.
+      #     push: true
+      #     tags: nriet/restcloud:2.4-slim-buster-python3
           
       # - name: restcloud:2.4-slim-buster-python3-fj
       #   uses: docker/build-push-action@v2 # docker build  & push
@@ -58,3 +58,9 @@ jobs:  # workflow中的job
       #     push: true
       #     tags: nriet/restcloud:2.4-slim-buster-python3-fj
           
+      - name: restcloud:2.4-slim-buster-zj-climate
+        uses: docker/build-push-action@v2 # docker build  & push
+        with:
+          context: zj-climate/.
+          push: true
+          tags: nriet/restcloud:2.4-slim-buster-zj-climate
