@@ -19,7 +19,7 @@ COPY lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
 
 RUN set -eux; \
 	\
-	tar zxvf /app/ncl.tar.gz -C /app/; \
+	tar zxvf /app/ncl.tar.gz -C /app; \
 	rm -rf /app/ncl.tar.gz
 
 EXPOSE 8080
