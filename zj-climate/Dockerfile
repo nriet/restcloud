@@ -1,4 +1,4 @@
-FROM nriet/restcloud:2.4-slim-buster
+FROM nriet/restcloud:2.5-slim-buster
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 

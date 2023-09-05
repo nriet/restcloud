@@ -4,7 +4,7 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV TZ PRC
 
-ENV RESTCLOUD_VERSION 2.4
+ENV RESTCLOUD_VERSION 2.5
 
 
 RUN set -eux; \
