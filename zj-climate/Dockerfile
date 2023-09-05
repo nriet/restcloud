@@ -1,4 +1,4 @@
-FROM continuumio/miniconda
+FROM continuumio/miniconda3:latest
 
 RUN set -eux; \
 	\
