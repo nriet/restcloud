@@ -1,51 +1,33 @@
-# FROM continuumio/miniconda3:latest
-
-# RUN set -eux; \
-# 	\
-# 	conda create -n ncl_stable -c conda-forge ncl cdo imagemagick; \
-# 	conda clean -y -a
-
-# CMD ["conda", "run", "-n", "ncl_stable", "/bin/bash", "-c"]
-
 FROM nriet/restcloud:2.5-slim-buster
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
-ENV NCLJOB_ROOTS :/app/ncl_component
-# ENV NCARG_ROOT :/app/ncl
-# ENV PATH /app/ncl/bin:$PATH
-# COPY app/* /app/
-
-COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
-
+# ENV NWP_PL_VERSION 1.0
+# COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
+# COPY app.tar.gz /
 COPY lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
+# ENV GRIB_DEFINITION_PATH /app/NWP_PL_V${NWP_PL_VERSION}/definitions
 
+# ENV LD_LIBRARY_PATH :/app/NWP_PL_V${NWP_PL_VERSION}/lib
 
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py38_23.1.0-1-Linux-x86_64.sh 
-RUN bash Miniconda3-py38_23.1.0-1-Linux-x86_64.sh -p /opt/miniconda -b
-RUN rm Miniconda3-py38_23.1.0-1-Linux-x86_64.sh
-#RUN cp /usr/local/bin/gunicorn /opt/miniconda/bin/
+RUN apt-get update \
+      && apt-get install -y --no-install-recommends \
+        gdal-bin libgdal-dev libnetcdf-dev postgresql-client postgis; \
+    rm -rf /var/lib/apt/lists/*
 
-
-ENV PATH /opt/miniconda/bin:${PATH}
-RUN conda update -y conda
-RUN conda init
-# RUN conda env create -f environment.yml
-# RUN rm -rf environment.yml
-
-
-# COPY sources.list /etc/apt/sources.list
-
+#timescaledb认证文件
+# COPY .pgpass /root/
 # RUN set -eux; \
 # 	\
-# 	tar zxvf /app/ncl.tar.gz -C /app; \
-# 	rm -rf /app/ncl.tar.gz
-
-# RUN apt-get update \
-#       && apt-get install -y --no-install-recommends \
-#        gcc-6/stretch fontconfig libssl-dev libidn11-dev libfontconfig1; \
-#     rm -rf /var/lib/apt/lists/*
-
+# 	chmod 600 /root/.pgpass /; \
+# 	tar zxvf /app.tar.gz -C /; \
+# 	rm -rf /app.tar.gz
+# COPY requirements.txt ./
+#下载Era5认证文件
+#https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form
+# COPY .cdsapirc /root/
+# RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8080
+
 CMD ["catalina.sh", "run"]
