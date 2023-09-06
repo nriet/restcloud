@@ -30,8 +30,8 @@ RUN rm Miniconda3-py38_23.1.0-1-Linux-x86_64.sh
 ENV PATH /opt/miniconda/bin:${PATH}
 RUN conda update -y conda
 RUN conda init
-RUN conda env create -f environment.yml
-RUN rm -rf environment.yml
+# RUN conda env create -f environment.yml
+# RUN rm -rf environment.yml
 
 
 # COPY sources.list /etc/apt/sources.list
