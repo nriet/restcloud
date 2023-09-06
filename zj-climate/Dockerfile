@@ -11,22 +11,35 @@ FROM nriet/restcloud:2.5-slim-buster
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
-ENV NCARG_ROOT :/app/ncl
 ENV NCLJOB_ROOTS :/app/ncl_component
-ENV PATH /app/ncl/bin:$PATH
-
-COPY app/* /app/
+# ENV NCARG_ROOT :/app/ncl
+# ENV PATH /app/ncl/bin:$PATH
+# COPY app/* /app/
 
 COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
 COPY lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
 
-COPY sources.list /etc/apt/sources.list
 
-RUN set -eux; \
-	\
-	tar zxvf /app/ncl.tar.gz -C /app; \
-	rm -rf /app/ncl.tar.gz
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py38_23.1.0-1-Linux-x86_64.sh 
+RUN bash Miniconda3-py38_23.1.0-1-Linux-x86_64.sh -p /opt/miniconda -b
+RUN rm Miniconda3-py38_23.1.0-1-Linux-x86_64.sh
+RUN cp /usr/local/bin/gunicorn /opt/miniconda/bin/
+
+
+ENV PATH /opt/miniconda/bin:${PATH}
+RUN conda update -y conda
+RUN conda init
+RUN conda env create -f environment.yml
+RUN rm -rf environment.yml
+
+
+# COPY sources.list /etc/apt/sources.list
+
+# RUN set -eux; \
+# 	\
+# 	tar zxvf /app/ncl.tar.gz -C /app; \
+# 	rm -rf /app/ncl.tar.gz
 
 # RUN apt-get update \
 #       && apt-get install -y --no-install-recommends \
