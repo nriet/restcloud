@@ -66,10 +66,10 @@ jobs:  # workflow中的job
           tags: nriet/restcloud:2.5-slim-buster-zj-climate
           
           
-      - name: restcloud:2.5-slim-buster-zj-climate-miniconda
-        uses: docker/build-push-action@v2 # docker build  & push
-        with:
-          context: zj-climate-miniconda/.
-          push: true
-          tags: nriet/restcloud:2.5-slim-buster-zj-climate-miniconda
+      # - name: restcloud:2.5-slim-buster-zj-climate-miniconda
+      #   uses: docker/build-push-action@v2 # docker build  & push
+      #   with:
+      #     context: zj-climate-miniconda/.
+      #     push: true
+      #     tags: nriet/restcloud:2.5-slim-buster-zj-climate-miniconda
           

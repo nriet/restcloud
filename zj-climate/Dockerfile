@@ -10,9 +10,14 @@ COPY lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
 
 # ENV LD_LIBRARY_PATH :/app/NWP_PL_V${NWP_PL_VERSION}/lib
 
+# RUN apt-get update \
+#       && apt-get install -y --no-install-recommends \
+#         gdal-bin libgdal-dev libnetcdf-dev postgresql-client postgis; \
+#     rm -rf /var/lib/apt/lists/*
+
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
-        gdal-bin libgdal-dev libnetcdf-dev postgresql-client postgis; \
+        libgeos-dev; \
     rm -rf /var/lib/apt/lists/*
 
 #timescaledb认证文件
