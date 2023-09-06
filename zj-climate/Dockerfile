@@ -24,7 +24,7 @@ COPY lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py38_23.1.0-1-Linux-x86_64.sh 
 RUN bash Miniconda3-py38_23.1.0-1-Linux-x86_64.sh -p /opt/miniconda -b
 RUN rm Miniconda3-py38_23.1.0-1-Linux-x86_64.sh
-RUN cp /usr/local/bin/gunicorn /opt/miniconda/bin/
+#RUN cp /usr/local/bin/gunicorn /opt/miniconda/bin/
 
 
 ENV PATH /opt/miniconda/bin:${PATH}
