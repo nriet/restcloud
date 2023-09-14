@@ -6,6 +6,9 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 # COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 # COPY app.tar.gz /
 COPY lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
+
+#解决Java jdbc连不上Sqlserver问题，TLS版本
+COPY java.security /usr/local/openjdk-8/jre/lib/security/
 # ENV GRIB_DEFINITION_PATH /app/NWP_PL_V${NWP_PL_VERSION}/definitions
 
 # ENV LD_LIBRARY_PATH :/app/NWP_PL_V${NWP_PL_VERSION}/lib
