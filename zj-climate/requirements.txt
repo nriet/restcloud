@@ -4,3 +4,4 @@ cdsapi
 xlrd
 pandas
 torch
+xarray
