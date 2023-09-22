@@ -58,12 +58,12 @@ jobs:  # workflow中的job
       #     push: true
       #     tags: nriet/restcloud:2.4-slim-buster-python3-fj
           
-      - name: restcloud:2.5-slim-buster-zj-climate
+      - name: restcloud:2.5-slim-buster-python3-zj-climate
         uses: docker/build-push-action@v2 # docker build  & push
         with:
           context: zj-climate/.
           push: true
-          tags: nriet/restcloud:2.5-slim-buster-zj-climate
+          tags: nriet/restcloud:2.5-slim-buster-python3-zj-climate
           
           
       # - name: restcloud:2.5-slim-buster-zj-climate-miniconda
