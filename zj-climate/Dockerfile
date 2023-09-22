@@ -31,10 +31,10 @@ RUN apt-get update \
 # 	tar zxvf /app.tar.gz -C /; \
 # 	rm -rf /app.tar.gz
 # COPY requirements.txt ./
-#下载Era5认证文件
+#下载EC认证文件，用于人工智能算法
 #https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form
-# COPY .cdsapirc /root/
-# RUN pip install --no-cache-dir -r requirements.txt
+COPY .cdsapirc /root/
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8080
 
