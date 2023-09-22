@@ -3,4 +3,3 @@ netcdf4
 cdsapi
 xlrd
 pandas
-torch
