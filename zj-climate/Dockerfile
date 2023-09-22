@@ -30,7 +30,7 @@ RUN apt-get update \
 # 	chmod 600 /root/.pgpass /; \
 # 	tar zxvf /app.tar.gz -C /; \
 # 	rm -rf /app.tar.gz
-# COPY requirements.txt ./
+COPY requirements.txt ./
 #下载EC认证文件，用于人工智能算法
 #https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form
 COPY .cdsapirc /root/
