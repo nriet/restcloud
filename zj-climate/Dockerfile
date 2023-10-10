@@ -18,10 +18,10 @@ COPY java.security /usr/local/openjdk-8/jre/lib/security/
 #         gdal-bin libgdal-dev libnetcdf-dev postgresql-client postgis; \
 #     rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update \
-      && apt-get install -y --no-install-recommends \
-        libgeos-dev; \
-    rm -rf /var/lib/apt/lists/*
+# RUN apt-get update \
+#       && apt-get install -y --no-install-recommends \
+#         libgeos-dev; \
+#     rm -rf /var/lib/apt/lists/*
 
 #timescaledb认证文件
 # COPY .pgpass /root/
@@ -30,10 +30,10 @@ RUN apt-get update \
 # 	chmod 600 /root/.pgpass /; \
 # 	tar zxvf /app.tar.gz -C /; \
 # 	rm -rf /app.tar.gz
-COPY requirements.txt ./
 #下载EC认证文件，用于人工智能算法
 #https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form
-COPY .cdsapirc /root/
+# COPY .cdsapirc /root/
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8080

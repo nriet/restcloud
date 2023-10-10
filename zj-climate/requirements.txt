@@ -1,7 +1,0 @@
-numpy
-netcdf4
-cdsapi
-xlrd
-pandas
-torch
-xarray

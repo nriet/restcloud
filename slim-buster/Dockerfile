@@ -4,8 +4,7 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV TZ PRC
 
-ENV RESTCLOUD_VERSION 2.6
-
+ENV RESTCLOUD_VERSION 2.7
 
 RUN set -eux; \
 	apt-get update; \
