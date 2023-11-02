@@ -4,7 +4,7 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV TZ PRC
 
-ENV RESTCLOUD_VERSION 2.7
+ENV RESTCLOUD_VERSION 2.8
 
 
 RUN set -eux; \
@@ -18,7 +18,7 @@ RUN set -eux; \
 
 RUN set -eux; \
 	\
-	wget -O ROOT.war "https://119.23.74.153/uploadfiles/RestCloud-ETL-V${RESTCLOUD_VERSION}.war" --no-check-certificate; \
+	wget -O ROOT.war "https://etl.restcloud.cn/download/RestCloud-ETL-V${RESTCLOUD_VERSION}.war" --no-check-certificate; \
 	rm -rf /usr/local/tomcat/webapps/*; \
 	unzip -oq ROOT.war -d /usr/local/tomcat/webapps/ROOT; \
 	rm -rf ROOT.war 
