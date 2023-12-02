@@ -18,10 +18,10 @@ COPY java.security /usr/local/openjdk-8/jre/lib/security/
 #         gdal-bin libgdal-dev libnetcdf-dev postgresql-client postgis; \
 #     rm -rf /var/lib/apt/lists/*
 
-# RUN apt-get update \
-#       && apt-get install -y --no-install-recommends \
-#         libgeos-dev; \
-#     rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+      && apt-get install -y --no-install-recommends \
+        curl; \
+    rm -rf /var/lib/apt/lists/*
 
 #timescaledb认证文件
 # COPY .pgpass /root/
