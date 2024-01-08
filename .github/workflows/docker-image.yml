@@ -37,19 +37,19 @@ jobs:  # workflow中的job
       #     push: true
       #     tags: nriet/restcloud
         
-      - name: restcloud:3.0-slim-buster
-        uses: docker/build-push-action@v2 # docker build  & push
-        with:
-          context: slim-buster/.
-          push: true
-          tags: nriet/restcloud:3.0-slim-buster
+      # - name: restcloud:3.0-slim-buster
+      #   uses: docker/build-push-action@v2 # docker build  & push
+      #   with:
+      #     context: slim-buster/.
+      #     push: true
+      #     tags: nriet/restcloud:3.0-slim-buster
 
-      - name: restcloud:3.0-slim-buster-python3
-        uses: docker/build-push-action@v2 # docker build  & push
-        with:
-          context: slim-buster-python3/.
-          push: true
-          tags: nriet/restcloud:3.0-slim-buster-python3
+      # - name: restcloud:3.0-slim-buster-python3
+      #   uses: docker/build-push-action@v2 # docker build  & push
+      #   with:
+      #     context: slim-buster-python3/.
+      #     push: true
+      #     tags: nriet/restcloud:3.0-slim-buster-python3
           
       # - name: restcloud:2.5-slim-buster-python3-fj
       #   uses: docker/build-push-action@v2 # docker build  & push
