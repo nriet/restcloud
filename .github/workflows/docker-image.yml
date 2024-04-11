@@ -18,6 +18,8 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
+        with:
+          lfs: true # 确保 Git LFS 文件被检出
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
