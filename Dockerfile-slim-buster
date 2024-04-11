@@ -4,22 +4,23 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV TZ PRC
 
-ENV RESTCLOUD_WAR_URL https://packages.aliyun.com/ui/repo/GENERIC/repos/flow_generic_repo/resources/214240136/content
+ENV RESTCLOUD_VERSION 3.2
 
- # thredds
- RUN apt-get update && \
-    apt-get install -y --no-install-recommends net-tools wget unzip && \
+RUN set -eux && \
+	apt-get update && \
+	apt-get install -y --no-install-recommends net-tools wget unzip && \
     apt-get clean && \
-	rm -rf /var/lib/apt/lists/* && \
-	#RESTCLOUD
-	wget -O ROOT.war "${RESTCLOUD_WAR_URL}" --no-check-certificate; \
-	rm -rf /usr/local/tomcat/webapps/*  && \
-	unzip ROOT.war -d /usr/local/webapps/ROOT/ && \
-	rm -f ROOT.war
+    rm -rf /var/lib/apt/lists/* && \
+	rm -rf /var/cache/apt 
+
+RUN set -eux; \
+	\
+	wget -O ROOT.war "https://etl.restcloud.cn/download/RestCloud-ETL-V${RESTCLOUD_VERSION}.war" --no-check-certificate; \
+	rm -rf /usr/local/tomcat/webapps/*; \
+	unzip -oq ROOT.war -d /usr/local/tomcat/webapps/ROOT; \
+	rm -rf ROOT.war 
 	
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-#COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 
 EXPOSE 8080 8443
 
