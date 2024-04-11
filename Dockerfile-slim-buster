@@ -6,19 +6,15 @@ ENV TZ PRC
 
 ENV RESTCLOUD_VERSION 3.2
 
-COPY war/RestCloud-ETL-V3.2.war RestCloud.war
+COPY war/RestCloud-ETL-V${RESTCLOUD_VERSION}.war RestCloud.war
 
-RUN set -eux; \
-	apt-get update; \
-	apt-get install -y --no-install-recommends \
-		net-tools \
-		wget \
-		unzip \
-	; \
-	rm -rf /usr/local/tomcat/webapps/*; \
-	unzip -oq RestCloud.war -d /usr/local/tomcat/webapps/ROOT; \
-	rm -rf RestCloud.war; \
-	rm -rf /var/cache/apt 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends unzip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+	rm -rf /usr/local/tomcat/webapps/*  && \
+	unzip -oq RestCloud.war -d /usr/local/tomcat/webapps/ROOT && \
+	rm -rf RestCloud.war
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
