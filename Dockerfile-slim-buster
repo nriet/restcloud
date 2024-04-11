@@ -6,9 +6,11 @@ ENV TZ PRC
 
 ENV RESTCLOUD_VERSION 3.2
 
-COPY war/RestCloud-ETL-V${RESTCLOUD_VERSION}.war /tmp/RestCloud.war
+COPY . /tmp/
 
 RUN ls -l /tmp
+
+RUN ls -l /tmp/war
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends unzip && \
