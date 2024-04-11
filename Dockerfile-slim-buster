@@ -4,12 +4,7 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV TZ PRC
 
-COPY . /tmp
-
-RUN cd /tmp && \
-	du -sh *
-
-ENV RESTCLOUD_WAR_URL https://etl.restcloud.cn/download/RestCloud-ETL-V3.2.war
+ENV RESTCLOUD_WAR_URL https://packages.aliyun.com/ui/repo/GENERIC/repos/flow_generic_repo/resources/214240136/content
 
  # thredds
  RUN apt-get update && \
