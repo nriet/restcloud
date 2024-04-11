@@ -1,4 +1,4 @@
-FROM nriet/tomcat:8.5.82-jdk8-openjdk-slim-buster
+FROM nriet/tomcat:8.5.78-jdk8-openjdk-slim-buster-python3
 
 MAINTAINER Axiu <itzyx@vip.qq.com>
 
