@@ -33,12 +33,17 @@ jobs:
       # - 
         # name: Generate App Version
         # run: echo APP_VERSION=`git describe --tags --always` >> $GITHUB_ENV
-      - name: restcloud:3.2-slim-buster
+      - name: slim-buster
         uses: docker/build-push-action@v2 # docker build  & push
         with:
-          context: slim-buster/.
+          file: Dockerfile-slim-buster
+          platforms: |
+            linux/amd64
+            linux/arm64
           push: true
-          tags: ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}-slim-buster
+          tags: |
+            ${{ env.DOCKERHUB_REPO }}:latest
+            ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}-slim-buster
 
       # - name: restcloud:3.2-slim-buster-python3
       #   uses: docker/build-push-action@v2 # docker build  & push
