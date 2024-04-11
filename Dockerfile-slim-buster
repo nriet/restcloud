@@ -8,8 +8,8 @@ ENV RESTCLOUD_WAR_URL https://etl.restcloud.cn/download/RestCloud-ETL-V3.2.war
 
  # thredds
  RUN apt-get update && \
-    apt-get install -y --no-install-recommends  vim build-essential m4 \
-        libpthread-stubs0-dev libcurl4-openssl-dev gosu zip unzip && \
+    apt-get install -y --no-install-recommends net-tools \
+        libpthread-stubs0-dev libcurl4-openssl-dev zip unzip && \
     apt-get clean && \
 	rm -rf /var/lib/apt/lists/* && \
 	#RESTCLOUD
