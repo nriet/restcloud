@@ -9,7 +9,7 @@ ENV RESTCLOUD_WAR_URL http://data.nriet.xyz/RestCloud-ETL-V3.2.war
 
 RUN set -eux && \
 	apt-get update && \
-	apt-get install -y --no-install-recommends net-tools wget unzip && \
+	apt-get install -y --no-install-recommends net-tools libcurl4-openssl-dev wget unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
 	rm -rf /var/cache/apt 
