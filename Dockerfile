@@ -10,16 +10,14 @@ ENV RESTCLOUD_WAR_URL https://github.com/nriet/restcloud/releases/download/3.4/R
 RUN set -eux && \
 	apt-get update && \
 	apt-get install -y --no-install-recommends wget unzip && \
+	wget -O ROOT.war "${RESTCLOUD_WAR_URL}" --no-check-certificate && \
+	rm -rf /usr/local/tomcat/webapps/* && \
+	unzip -oq ROOT.war -d /usr/local/tomcat/webapps/ROOT && \
+	rm -rf ROOT.war &&\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
 	rm -rf /var/cache/apt 
 
-RUN set -eux; \
-	\
-	wget -O ROOT.war "${RESTCLOUD_WAR_URL}" --no-check-certificate; \
-	rm -rf /usr/local/tomcat/webapps/*; \
-	unzip -oq ROOT.war -d /usr/local/tomcat/webapps/ROOT; \
-	rm -rf ROOT.war 
 	
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
