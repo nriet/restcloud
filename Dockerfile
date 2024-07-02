@@ -7,17 +7,21 @@ ENV TZ PRC
 ENV RESTCLOUD_WAR_URL https://github.com/nriet/restcloud/releases/download/3.4/RestCloud-ETL-V3.4.war
 # ENV RESTCLOUD_WAR_URL http://data.nriet.xyz/RestCloud-ETL-V3.2.war
 
-RUN set -eux && \
-	apt-get update && \
-	apt-get install -y --no-install-recommends wget unzip && \
-	wget -O ROOT.war "${RESTCLOUD_WAR_URL}" --no-check-certificate && \
-	rm -rf /usr/local/tomcat/webapps/* && \
-	unzip -oq ROOT.war -d /usr/local/tomcat/webapps/ROOT && \
-	rm -rf ROOT.war &&\
+	
+# Install necessary packages
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends  vim build-essential m4 \
+        libpthread-stubs0-dev libcurl4-openssl-dev gosu zip unzip && \
+    # Cleanup
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-	rm -rf /var/cache/apt 
-
+    # Eliminate default web applications
+    rm -rf ${CATALINA_HOME}/webapps/* && \
+    rm -rf ${CATALINA_HOME}/webapps.dist && \
+    # restcloud
+    curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.war && \
+    unzip ROOT.war -d ${CATALINA_HOME}/webapps/ROOT/ && \
+    rm -f ROOT.war
 	
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
