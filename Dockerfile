@@ -17,12 +17,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     # Eliminate default web applications
     rm -rf ${CATALINA_HOME}/webapps/* && \
-    rm -rf ${CATALINA_HOME}/webapps.dist && \
+    rm -rf ${CATALINA_HOME}/webapps.dist 
     # restcloud
-    curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.war && \
-    unzip ROOT.war -d ${CATALINA_HOME}/webapps/ROOT/ && \
-    rm -f ROOT.war
-	
+    # curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.war && \
+    # unzip ROOT.war -d ${CATALINA_HOME}/webapps/ROOT/ && \
+    # rm -f ROOT.war
+
 EXPOSE 8080 8443
 
 # Start container
