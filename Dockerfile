@@ -11,11 +11,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install necessary packages
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends  vim build-essential m4 \
-        libpthread-stubs0-dev libcurl4-openssl-dev gosu zip unzip && \
+    apt-get install -y --no-install-recommends vim libcurl4-openssl-dev zip unzip && \
     # Cleanup
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/lib/apt/lists/*
     # Eliminate default web applications
     # rm -rf ${CATALINA_HOME}/webapps/* && \
     # rm -rf ${CATALINA_HOME}/webapps.dist && \
