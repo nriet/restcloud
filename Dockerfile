@@ -19,9 +19,9 @@ RUN apt-get update && \
     rm -rf ${CATALINA_HOME}/webapps/* && \
     rm -rf ${CATALINA_HOME}/webapps.dist && \
     # restcloud
-    curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.war && \
-    unzip ROOT.war -d ${CATALINA_HOME}/webapps/ROOT/ && \
-    rm -f ROOT.war
+    # curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.war && \
+    # unzip ROOT.war -d ${CATALINA_HOME}/webapps/ROOT/ && \
+    # rm -f ROOT.war
 	
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
