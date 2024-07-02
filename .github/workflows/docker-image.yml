@@ -3,7 +3,7 @@ name: Publish Docker image   # workflow名称，可以在Github项目主页的�
 env:
   APP_NAME: restcloud
   DOCKERHUB_REPO: nriet/restcloud
-  APP_VERSION: 3.3
+  APP_VERSION: 3.4
 on:   # 配置触发workflow的事件
   push:
     branches:   # master分支有push时触发此workflow
@@ -33,26 +33,26 @@ jobs:
       # - 
         # name: Generate App Version
         # run: echo APP_VERSION=`git describe --tags --always` >> $GITHUB_ENV
-      - name: slim-buster
+      - name: 8.5jdk
         uses: docker/build-push-action@v2 # docker build  & push
         with:
-          file: Dockerfile-slim-buster
+          file: Dockerfile
           platforms: |
             linux/amd64
             linux/arm64
           push: true
           tags: |
             ${{ env.DOCKERHUB_REPO }}:latest
-            ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}-slim-buster
-      - name: slim-buster-python3
-        uses: docker/build-push-action@v2 # docker build  & push
-        with:
-          file: Dockerfile-slim-buster-python3
-          platforms: |
-            linux/amd64
-            linux/arm64
-          push: true
-          tags: ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}-slim-buster-python3
+            ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}
+      # - name: slim-buster-python3
+      #   uses: docker/build-push-action@v2 # docker build  & push
+      #   with:
+      #     file: Dockerfile-slim-buster-python3
+      #     platforms: |
+      #       linux/amd64
+      #       linux/arm64
+      #     push: true
+      #     tags: ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}-slim-buster-python3
 
       # - name: restcloud:3.2-slim-buster-python3
       #   uses: docker/build-push-action@v2 # docker build  & push
