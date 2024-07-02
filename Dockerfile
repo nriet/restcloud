@@ -14,14 +14,15 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends vim libcurl4-openssl-dev zip unzip && \
     # Cleanup
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
     # Eliminate default web applications
-    # rm -rf ${CATALINA_HOME}/webapps/* && \
-    # rm -rf ${CATALINA_HOME}/webapps.dist && \
+    rm -rf ${CATALINA_HOME}/webapps/* && \
+    rm -rf ${CATALINA_HOME}/webapps.dist && \
     # restcloud
-    # curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.war && \
-    # unzip ROOT.war -d ${CATALINA_HOME}/webapps/ROOT/ && \
-    # rm -f ROOT.war
+    curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.war && \
+    unzip ROOT.war -d ${CATALINA_HOME}/webapps/ROOT/ && \
+    rm -f ROOT.war
+	
 EXPOSE 8080 8443
 
 # Start container
