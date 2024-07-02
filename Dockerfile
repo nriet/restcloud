@@ -21,7 +21,7 @@ RUN apt-get update && \
     rm -rf ${CATALINA_HOME}/webapps.dist && \
     # restcloud
     curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.zip && \
-    unzip ROOT.zip -d ${CATALINA_HOME}/webapps/ROOT/ && \
+    unzip ROOT.zip -d ${CATALINA_HOME}/webapps/ && \
     rm -f ROOT.zip
 
 EXPOSE 8080 8443
