@@ -4,8 +4,8 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 
 ENV TZ PRC
 
-ENV RESTCLOUD_WAR_URL https://github.com/nriet/restcloud/releases/download/3.2/RestCloud-ETL-V3.2.war
-# ENV RESTCLOUD_WAR_URL http://data.nriet.xyz/RestCloud-ETL-V3.2.war
+ENV RESTCLOUD_WAR_URL https://github.com/nriet/restcloud/releases/download/3.8/RestCloud-ETL-V3.8.war
+# ENV RESTCLOUD_WAR_URL http://data.nriet.xyz/RestCloud-ETL-V3.8.war
 
 RUN set -eux && \
 	apt-get update && \
