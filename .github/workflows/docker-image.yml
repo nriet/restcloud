@@ -33,28 +33,28 @@ jobs:
       # - 
         # name: Generate App Version
         # run: echo APP_VERSION=`git describe --tags --always` >> $GITHUB_ENV
-      # - name: 8.5jdk
-      #   uses: docker/build-push-action@v2 # docker build  & push
-      #   with:
-      #     file: Dockerfile
-      #     platforms: |
-      #       linux/amd64
-      #       linux/arm64
-      #     push: true
-      #     tags: |
-      #       ${{ env.DOCKERHUB_REPO }}:latest
-      #       ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}
-      # - name: 8.5jdk
-      #   uses: docker/build-push-action@v2 # docker build  & push
-      #   with:
-      #     file: Dockerfile-python3
-      #     platforms: |
-      #       linux/amd64
-      #       linux/arm64
-      #     push: true
-      #     tags: |
-      #       ${{ env.DOCKERHUB_REPO }}:latest
-      #       ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}-python3
+      - name: 8.5jdk
+        uses: docker/build-push-action@v2 # docker build  & push
+        with:
+          file: Dockerfile
+          platforms: |
+            linux/amd64
+            linux/arm64
+          push: true
+          tags: |
+            ${{ env.DOCKERHUB_REPO }}:latest
+            ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}
+      - name: 8.5jdk
+        uses: docker/build-push-action@v2 # docker build  & push
+        with:
+          file: Dockerfile-python3
+          platforms: |
+            linux/amd64
+            linux/arm64
+          push: true
+          tags: |
+            ${{ env.DOCKERHUB_REPO }}:latest
+            ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}-python3
       - name: slim-buster
         uses: docker/build-push-action@v2 # docker build  & push
         with:
