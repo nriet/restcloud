@@ -22,7 +22,7 @@ RUN apt-get update && \
     # restcloud
     curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.zip && \
     unzip ROOT.zip -d ${CATALINA_HOME}/webapps/ && \
-    mv ${CATALINA_HOME}/webapps/RestCloud-ETL-V3.8 ${CATALINA_HOME}/webapps/ROOT && \
+    mv ${CATALINA_HOME}/webapps/RestCloud-ETL-V3.9 ${CATALINA_HOME}/webapps/ROOT && \
     rm -f ROOT.zip
 
 EXPOSE 8080 8443
