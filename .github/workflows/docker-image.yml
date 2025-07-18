@@ -3,7 +3,7 @@ name: Publish Docker image   # workflow名称，可以在Github项目主页的�
 env:
   APP_NAME: restcloud
   DOCKERHUB_REPO: nriet/restcloud
-  APP_VERSION: 3.9
+  APP_VERSION: 3.9.4
 on:   # 配置触发workflow的事件
   push:
     branches:   # master分支有push时触发此workflow

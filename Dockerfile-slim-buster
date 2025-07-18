@@ -5,7 +5,7 @@ MAINTAINER Axiu <itzyx@vip.qq.com>
 ENV TZ PRC
 ENV CATALINA_HOME /usr/local/tomcat
 ENV UNZIP_DISABLE_ZIPBOMB_DETECTION TRUE
-ENV RESTCLOUD_WAR_URL https://github.com/nriet/restcloud/releases/download/3.9/RestCloud-ETL-V3.9.zip
+ENV RESTCLOUD_WAR_URL https://github.com/nriet/restcloud/releases/download/3.9.4/RestCloud-ETL-V3.9.4.zip
 # ENV RESTCLOUD_WAR_URL http://data.nriet.xyz/RestCloud-ETL-V3.2.war
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -22,7 +22,7 @@ RUN apt-get update && \
     # restcloud
     curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.zip && \
     unzip ROOT.zip -d ${CATALINA_HOME}/webapps/ && \
-    mv ${CATALINA_HOME}/webapps/RestCloud-ETL-V3.9 ${CATALINA_HOME}/webapps/ROOT && \
+    mv ${CATALINA_HOME}/webapps/RestCloud-ETL-V3.9.4 ${CATALINA_HOME}/webapps/ROOT && \
     rm -f ROOT.zip
 
 EXPOSE 8080 8443
