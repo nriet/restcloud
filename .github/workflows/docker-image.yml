@@ -57,65 +57,61 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       # ================================================================
-      # 1. RestCloud (no Python) - 全量 JDK 8
+      # 1. RestCloud (no Python) - 全量 JDK 8 (amd64)
       # ================================================================
       - name: Build & Push (full-jdk8)
         uses: docker/build-push-action@v6
         with:
           file: Dockerfile
-          platforms: |
-            linux/amd64
-            linux/arm64
+          platforms: linux/amd64
           push: true
           tags: |
             ${{ env.DOCKERHUB_REPO }}:${{ steps.version.outputs.version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          provenance: false
 
       # ================================================================
-      # 2. RestCloud (no Python) - slim-buster
+      # 2. RestCloud (no Python) - slim-buster (amd64)
       # ================================================================
       - name: Build & Push (slim-buster)
         uses: docker/build-push-action@v6
         with:
           file: Dockerfile-slim-buster
-          platforms: |
-            linux/amd64
-            linux/arm64
+          platforms: linux/amd64
           push: true
           tags: |
             ${{ env.DOCKERHUB_REPO }}:${{ steps.version.outputs.version }}-slim-buster
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          provenance: false
 
       # ================================================================
-      # 3. RestCloud (with Python3) - slim-buster
+      # 3. RestCloud (with Python3) - slim-buster (amd64)
       # ================================================================
       - name: Build & Push (slim-buster-python3)
         uses: docker/build-push-action@v6
         with:
           file: Dockerfile-slim-buster-python3
-          platforms: |
-            linux/amd64
-            linux/arm64
+          platforms: linux/amd64
           push: true
           tags: |
             ${{ env.DOCKERHUB_REPO }}:${{ steps.version.outputs.version }}-slim-buster-python3
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          provenance: false
 
       # ================================================================
-      # 4. RestCloud (compiled Python3) - 全量 JDK 8 + Python 源码编译
+      # 4. RestCloud (compiled Python3) - 全量 JDK 8 + Python 源码编译 (amd64)
       # ================================================================
       - name: Build & Push (full-jdk8-python3)
         uses: docker/build-push-action@v6
         with:
           file: Dockerfile-python3
-          platforms: |
-            linux/amd64
-            linux/arm64
+          platforms: linux/amd64
           push: true
           tags: |
             ${{ env.DOCKERHUB_REPO }}:${{ steps.version.outputs.version }}-python3
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          provenance: false
