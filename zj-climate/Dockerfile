@@ -1,41 +1,43 @@
+# syntax=docker/dockerfile:1.7
+
+# ============================================================================
+# RestCloud ETL - zj-climate（浙江气候）定制镜像
+# 基于 nriet/restcloud:3.2-slim-buster-python3
+# ============================================================================
+
 FROM nriet/restcloud:3.2-slim-buster-python3
 
-MAINTAINER Axiu <itzyx@vip.qq.com>
+LABEL maintainer="Axiu <itzyx@vip.qq.com>"
+LABEL org.opencontainers.image.title="RestCloud ETL - ZJ Climate"
+LABEL org.opencontainers.image.description="RestCloud ETL 浙江气候定制版"
 
-# ENV NWP_PL_VERSION 1.0
-# COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
-# COPY app.tar.gz /
+ENV APP_USER=restcloud
+
+# 复制自定义 lib
 COPY lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
 
-#解决Java jdbc连不上Sqlserver问题，TLS版本
+# 解决 Java JDBC 连接 SQL Server 的 TLS 版本问题
 COPY java.security /usr/local/openjdk-8/jre/lib/security/
-# ENV GRIB_DEFINITION_PATH /app/NWP_PL_V${NWP_PL_VERSION}/definitions
 
-# ENV LD_LIBRARY_PATH :/app/NWP_PL_V${NWP_PL_VERSION}/lib
-
-# RUN apt-get update \
-#       && apt-get install -y --no-install-recommends \
-#         gdal-bin libgdal-dev libnetcdf-dev postgresql-client postgis; \
-#     rm -rf /var/lib/apt/lists/*
-
+# 安装 curl（用于健康检查）
 RUN apt-get update \
-      && apt-get install -y --no-install-recommends \
-        curl; \
-    rm -rf /var/lib/apt/lists/*
+      && apt-get install -y --no-install-recommends curl \
+      && rm -rf /var/lib/apt/lists/*
 
-#timescaledb认证文件
-# COPY .pgpass /root/
-# RUN set -eux; \
-# 	\
-# 	chmod 600 /root/.pgpass /; \
-# 	tar zxvf /app.tar.gz -C /; \
-# 	rm -rf /app.tar.gz
-#下载EC认证文件，用于人工智能算法
-#https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form
-# COPY .cdsapirc /root/
+# 安装 Python 依赖
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
+# 确保非 root 用户能访问
+RUN if getent passwd ${APP_USER} > /dev/null 2>&1; then \
+        chown -R ${APP_USER}:${APP_USER} /usr/local/tomcat/webapps; \
+    fi
+
+USER ${APP_USER}
+
 EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+    CMD curl --fail --silent 'http://localhost:8080/restcloud/view/page/index.html' > /dev/null || exit 1
 
 CMD ["catalina.sh", "run"]

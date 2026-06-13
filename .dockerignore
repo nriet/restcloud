@@ -1,0 +1,54 @@
+# Git
+.git/
+.gitattributes
+.gitignore
+
+# Docker
+.dockerignore
+Dockerfile*
+docker-compose*.yml
+
+# IDE & OS
+.DS_Store
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.iml
+
+# Build artifacts
+*.tar.gz
+*.zip
+*.war
+*.jar
+
+# Temp files
+tmp/
+temp/
+
+# README & docs (not needed in build context)
+README.md
+
+# Upload sub-projects (built separately)
+upload/
+ah/
+fj/
+zl-climate/
+zj-climate/
+zj-climate-miniconda/
+slim-buster/
+slim-buster-python3/
+
+# Secrets (NEVER send to Docker daemon)
+**/.cdsapirc
+**/.pgpass
+**/passwd
+**/secret*
+**/*.pem
+**/*.key
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo

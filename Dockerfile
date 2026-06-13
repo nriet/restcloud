@@ -1,35 +1,67 @@
+# syntax=docker/dockerfile:1.7
+
+# ============================================================================
+# RestCloud ETL - 主镜像（无 Python）
+# 基于 nriet/tomcat:8.5-jdk8
+# ============================================================================
+
 FROM nriet/tomcat:8.5-jdk8
 
-MAINTAINER Axiu <itzyx@vip.qq.com>
+LABEL maintainer="Axiu <itzyx@vip.qq.com>"
+LABEL org.opencontainers.image.title="RestCloud ETL"
+LABEL org.opencontainers.image.description="RestCloud ETL Community Edition - Data Integration Platform（无 Python）"
+LABEL org.opencontainers.image.version="4.2"
+LABEL org.opencontainers.image.source="https://github.com/nriet/restcloud"
 
-ENV TZ PRC
-ENV CATALINA_HOME /usr/local/tomcat
-ENV UNZIP_DISABLE_ZIPBOMB_DETECTION TRUE
-ENV RESTCLOUD_WAR_URL https://github.com/nriet/restcloud/releases/download/4.2/RestCloud-ETL-V4.2.zip
-# ENV RESTCLOUD_WAR_URL http://data.nriet.xyz/RestCloud-ETL-V3.2.war
+ARG RESTCLOUD_VERSION=4.2
+ARG RESTCLOUD_WAR_URL=https://github.com/nriet/restcloud/releases/download/${RESTCLOUD_VERSION}/RestCloud-ETL-V${RESTCLOUD_VERSION}.zip
 
+ENV TZ=PRC \
+    CATALINA_HOME=/usr/local/tomcat \
+    UNZIP_DISABLE_ZIPBOMB_DETECTION=TRUE \
+    APP_USER=restcloud
+
+# 设置时区
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# Install necessary packages
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends vim build-essential libhdf5-dev zlib1g-dev libnetcdf-dev libcurl4-openssl-dev zip unzip && \
-    # Cleanup
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    # Eliminate default web applications
-    rm -rf ${CATALINA_HOME}/webapps/* && \
-    rm -rf ${CATALINA_HOME}/webapps.dist && \
-    # restcloud
-    curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.zip && \
-    unzip ROOT.zip -d ${CATALINA_HOME}/webapps/ && \
-    mv ${CATALINA_HOME}/webapps/RestCloud-ETL-V4.2 ${CATALINA_HOME}/webapps/ROOT && \
-    rm -f ROOT.zip
+# 安装运行时依赖并部署 RestCloud
+# build-essential / libhdf5-dev 等为 ETL 引擎的 JNI 原生库所需
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        libhdf5-dev \
+        zlib1g-dev \
+        libnetcdf-dev \
+        libcurl4-openssl-dev \
+        zip \
+        unzip \
+        curl \
+    ; \
+    # 清除默认 web 应用
+    rm -rf ${CATALINA_HOME}/webapps/*; \
+    rm -rf ${CATALINA_HOME}/webapps.dist; \
+    # 下载并部署 RestCloud
+    curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.zip; \
+    unzip ROOT.zip -d ${CATALINA_HOME}/webapps/; \
+    mv ${CATALINA_HOME}/webapps/RestCloud-ETL-V${RESTCLOUD_VERSION} ${CATALINA_HOME}/webapps/ROOT; \
+    rm -f ROOT.zip; \
+    # 清理 apt 缓存
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/*
+
+# 创建非 root 用户
+RUN set -eux; \
+    groupadd -r ${APP_USER} --gid=1001; \
+    useradd -r -g ${APP_USER} --uid=1001 -d ${CATALINA_HOME} -s /sbin/nologin ${APP_USER}; \
+    chown -R ${APP_USER}:${APP_USER} ${CATALINA_HOME}/webapps ${CATALINA_HOME}/temp ${CATALINA_HOME}/work ${CATALINA_HOME}/logs; \
+    chmod -R g-w ${CATALINA_HOME}/webapps
+
+USER ${APP_USER}
 
 EXPOSE 8080 8443
 
-# Start container
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+    CMD curl --fail --silent 'http://localhost:8080/restcloud/view/page/index.html' > /dev/null || exit 1
+
 CMD ["catalina.sh", "run"]
-
-HEALTHCHECK --interval=60s --timeout=3s \
-	CMD curl --fail 'http://localhost:8080/restcloud/view/page/index.html' || exit 1
-

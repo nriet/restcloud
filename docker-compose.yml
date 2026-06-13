@@ -1,0 +1,70 @@
+# ============================================================================
+# docker-compose.yml - RestCloud ETL + MongoDB
+#
+# 使用方式:
+#   docker compose up -d
+#
+# 安全提醒:
+#   请先修改以下默认密码再部署到生产环境！
+#   - MONGO_INITDB_ROOT_PASSWORD
+#   - MONGODB_PASSWORD
+# ============================================================================
+
+version: "3.9"
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: restcloud-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh --quiet
+      interval: 30s
+      timeout: 5s
+      start_period: 40s
+      retries: 3
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-admin123}
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+
+  restcloud:
+    image: nriet/restcloud:latest
+    container_name: restcloud
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      MONGODB_HOST: mongodb:27017
+      MONGODB_USER: admin
+      MONGODB_PASSWORD: ${MONGO_ROOT_PASSWORD:-admin123}
+      # 时区设置
+      TZ: Asia/Shanghai
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8080/restcloud/view/page/index.html"]
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+
+volumes:
+  mongo_data:
+    name: restcloud-mongo-data
