@@ -18,7 +18,7 @@ ENV TZ=PRC \
 RUN set -eux; \
     # Debian Buster 已 EOL（2024-06），切换到 archive 源
     sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list; \
-    sed -i 's|security.debian.org|archive.debian.org/security|g' /etc/apt/sources.list; \
+    sed -i 's|security.debian.org/debian-security|archive.debian.org/debian-security|g' /etc/apt/sources.list; \
     sed -i '/buster-updates/d' /etc/apt/sources.list; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
