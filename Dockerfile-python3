@@ -159,10 +159,8 @@ RUN set -eux; \
     useradd -r -g ${APP_USER} --uid=1001 -d ${CATALINA_HOME} -s /sbin/nologin ${APP_USER}; \
     chown -R ${APP_USER}:${APP_USER} ${CATALINA_HOME}/webapps ${CATALINA_HOME}/temp ${CATALINA_HOME}/work ${CATALINA_HOME}/logs
 
-# 从编译阶段复制 Python 运行时（仅二进制 + 共享库 + 标准库）
+# 从编译阶段复制 Python 运行时（/usr/local 已包含 python3、libpython3.9.so、标准库、pip）
 COPY --from=python-builder /usr/local /usr/local
-COPY --from=python-builder /usr/lib/x86_64-linux-gnu/libpython3.9.so* /usr/lib/x86_64-linux-gnu/
-COPY --from=python-builder /usr/lib/python3.9 /usr/lib/python3.9
 
 # 更新共享库缓存并创建 Python 软链
 RUN ldconfig && \
