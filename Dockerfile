@@ -41,9 +41,10 @@ RUN set -eux; \
     # 清除默认 web 应用
     rm -rf ${CATALINA_HOME}/webapps/*; \
     rm -rf ${CATALINA_HOME}/webapps.dist; \
-    # 下载并部署 RestCloud（ZIP 为 Spring Boot 扁平结构，直接解压到 webapps/）
+    # 下载并部署 RestCloud（ZIP 无 ROOT 目录，解压到 webapps/ROOT/）
     curl -fSL "${RESTCLOUD_WAR_URL}" -o ROOT.zip; \
-    unzip -q ROOT.zip -d ${CATALINA_HOME}/webapps/; \
+    mkdir -p ${CATALINA_HOME}/webapps/ROOT; \
+    unzip -q ROOT.zip -d ${CATALINA_HOME}/webapps/ROOT; \
     rm -f ROOT.zip; \
     # 清理 apt 缓存
     apt-get clean; \
