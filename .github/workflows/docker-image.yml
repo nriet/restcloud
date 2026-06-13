@@ -6,10 +6,10 @@
 #   - tag 推送时同时构建并推送镜像
 #
 # 构建策略:
-#   1. Dockerfile        → nriet/restcloud:latest, :<version>
-#   2. Dockerfile-slim-buster → nriet/restcloud:<version>-slim-buster
-#   3. Dockerfile-slim-buster-python3 → nriet/restcloud:<version>-slim-buster-python3
-#   4. Dockerfile-python3 → nriet/restcloud:<version>-python3
+#   1. Dockerfile        → nriet/restcloud:<RESTCLOUD_VERSION>
+#   2. Dockerfile-slim-buster → nriet/restcloud:<RESTCLOUD_VERSION>-slim-buster
+#   3. Dockerfile-slim-buster-python3 → nriet/restcloud:<RESTCLOUD_VERSION>-slim-buster-python3
+#   4. Dockerfile-python3 → nriet/restcloud:<RESTCLOUD_VERSION>-python3
 # ============================================================================
 
 name: Publish Docker Image
@@ -32,17 +32,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate App Version
+      - name: Detect RESTCLOUD_VERSION
         id: version
         run: |
-          # 如果是 tag 触发，使用 tag 名；否则使用 git describe
+          # 优先使用 git tag（推送 tag 时）
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
             VERSION="${GITHUB_REF#refs/tags/}"
+            VERSION="${VERSION#v}"  # 去掉 v 前缀（v4.2 -> 4.2）
           else
-            VERSION="$(git describe --tags --always 2>/dev/null || echo 'dev')"
+            # 从 Dockerfile 读取 RESTCLOUD_VERSION 作为版本号
+            VERSION=$(grep -m1 '^ARG RESTCLOUD_VERSION=' Dockerfile | sed 's/^.*=//')
           fi
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
-          echo "Detected version: ${VERSION}"
+          echo "Detected RESTCloud version: ${VERSION}"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
