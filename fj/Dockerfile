@@ -21,10 +21,15 @@ COPY application.properties /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/
 COPY lib/* /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
 
 # 安装 GDAL / PostGIS 等地理空间库
-RUN apt-get update \
-      && apt-get install -y --no-install-recommends \
-        gdal-bin libgdal-dev libnetcdf-dev postgresql-client postgis \
-      && rm -rf /var/lib/apt/lists/*
+RUN set -eux; \
+    # Debian Buster 已 EOL（2024-06），切换到 archive 源
+    sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list; \
+    sed -i 's|security.debian.org|archive.debian.org/security|g' /etc/apt/sources.list; \
+    sed -i '/buster-updates/d' /etc/apt/sources.list; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        gdal-bin libgdal-dev libnetcdf-dev postgresql-client postgis; \
+    rm -rf /var/lib/apt/lists/*
 
 # 解压应用数据
 COPY app.tar.gz /
