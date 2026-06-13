@@ -126,24 +126,12 @@ ENV TZ=PRC \
 # 设置时区
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# 安装运行时依赖（仅 Python 运行所需最小共享库）、部署 RestCloud
+# 安装运行时依赖并部署 RestCloud
 RUN set -eux; \
     RESTCLOUD_WAR_URL="https://github.com/nriet/restcloud/releases/download/${RESTCLOUD_VERSION}/RestCloud-ETL-V${RESTCLOUD_VERSION}.zip"; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
-        # Python 运行时共享库依赖
-        libbz2-1.0 \
-        libexpat1 \
-        libffi7 \
-        libgdbm6 \
-        liblzma5 \
-        libncursesw5 \
-        libreadline7 \
-        libsqlite3-0 \
-        libssl1.1 \
-        tk \
-        uuid \
-        # ETL 引擎 JNI 原生库
+        # ETL 引擎 JNI 原生库 + Python 运行时共享库依赖
         build-essential \
         libhdf5-dev \
         libnetcdf-dev \
