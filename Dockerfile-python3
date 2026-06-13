@@ -117,7 +117,6 @@ LABEL org.opencontainers.image.version="4.2"
 LABEL org.opencontainers.image.source="https://github.com/nriet/restcloud"
 
 ARG RESTCLOUD_VERSION=4.2
-ARG RESTCLOUD_WAR_URL=https://github.com/nriet/restcloud/releases/download/${RESTCLOUD_VERSION}/RestCloud-ETL-V${RESTCLOUD_VERSION}.zip
 
 ENV TZ=PRC \
     CATALINA_HOME=/usr/local/tomcat \
@@ -129,6 +128,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # 安装运行时依赖（仅 Python 运行所需最小共享库）、部署 RestCloud
 RUN set -eux; \
+    RESTCLOUD_WAR_URL="https://github.com/nriet/restcloud/releases/download/${RESTCLOUD_VERSION}/RestCloud-ETL-V${RESTCLOUD_VERSION}.zip"; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         # Python 运行时共享库依赖

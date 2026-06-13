@@ -14,7 +14,6 @@ LABEL org.opencontainers.image.version="4.2"
 LABEL org.opencontainers.image.source="https://github.com/nriet/restcloud"
 
 ARG RESTCLOUD_VERSION=4.2
-ARG RESTCLOUD_WAR_URL=https://github.com/nriet/restcloud/releases/download/${RESTCLOUD_VERSION}/RestCloud-ETL-V${RESTCLOUD_VERSION}.zip
 
 ENV TZ=PRC \
     CATALINA_HOME=/usr/local/tomcat \
@@ -27,6 +26,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # 安装运行时依赖并部署 RestCloud
 # build-essential / libhdf5-dev 等为 ETL 引擎的 JNI 原生库所需
 RUN set -eux; \
+    RESTCLOUD_WAR_URL="https://github.com/nriet/restcloud/releases/download/${RESTCLOUD_VERSION}/RestCloud-ETL-V${RESTCLOUD_VERSION}.zip"; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         build-essential \
