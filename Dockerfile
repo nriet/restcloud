@@ -23,7 +23,7 @@ ENV TZ=PRC \
 # 设置时区
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# 安装运行时依赖并部署 RestCloud
+# 安装运行时依赖、部署 RestCloud、创建非 root 用户（合并在单层避免 chmod 触发 overlay copy-up）
 # build-essential / libhdf5-dev 等为 ETL 引擎的 JNI 原生库所需
 RUN set -eux; \
     RESTCLOUD_WAR_URL="https://github.com/nriet/restcloud/releases/download/${RESTCLOUD_VERSION}/RestCloud-ETL-V${RESTCLOUD_VERSION}.zip"; \
@@ -47,14 +47,11 @@ RUN set -eux; \
     rm -f ROOT.zip; \
     # 清理 apt 缓存
     apt-get clean; \
-    rm -rf /var/lib/apt/lists/*
-
-# 创建非 root 用户
-RUN set -eux; \
+    rm -rf /var/lib/apt/lists/*; \
+    # 创建非 root 用户并设置权限（与解压在同一层，避免 overlay filesystem 拷贝文件）
     groupadd -r ${APP_USER} --gid=1001; \
     useradd -r -g ${APP_USER} --uid=1001 -d ${CATALINA_HOME} -s /sbin/nologin ${APP_USER}; \
-    chown -R ${APP_USER}:${APP_USER} ${CATALINA_HOME}/webapps ${CATALINA_HOME}/temp ${CATALINA_HOME}/work ${CATALINA_HOME}/logs; \
-    chmod -R g-w ${CATALINA_HOME}/webapps
+    chown -R ${APP_USER}:${APP_USER} ${CATALINA_HOME}/webapps ${CATALINA_HOME}/temp ${CATALINA_HOME}/work ${CATALINA_HOME}/logs
 
 USER ${APP_USER}
 
