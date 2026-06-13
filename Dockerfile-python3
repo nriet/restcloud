@@ -95,7 +95,7 @@ RUN set -eux; \
     echo "$PYTHON_GET_PIP_SHA256 *get-pip.py" | sha256sum -c -; \
     \
     export PYTHONDONTWRITEBYTECODE=1; \
-    python get-pip.py \
+    python3 get-pip.py \
         --disable-pip-version-check \
         --no-cache-dir \
         --no-compile \
